@@ -1,4 +1,4 @@
-package com.uwillno.uwb;
+package org.uwillno.uwb;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -212,21 +212,15 @@ public class MainActivity extends AppCompatActivity {
         webView = findViewById(R.id.webview);
 //        if(url.)
 //        webView.loadUrl("https://uwillno.com");
-        Bundle bundle = getIntent().getBundleExtra("UWillno");
-//        bundle.();
-//        getIntent().putExtra()
+        Bundle bundle =  getIntent().getBundleExtra("UWillno");
         if (bundle != null) {
             String url = bundle.getString("url");
             cannotBack = bundle.getBoolean("back");
-            if (!TextUtils.isEmpty(url)) {
+            if (!TextUtils.isEmpty(url))
                 webView.loadUrl(url);
-            } else
-                webView.loadUrl("https://uwillno.com");
         } else {
-//            webView.loadUrl("https://st.uwillno.com");
-//                webView.loadDataWithBaseURL("https://st.uwillno.com");
+            webView.loadUrl("https://uwillno.com");
         }
-
         // 添加 JavaScript 接口
 //        webView.addJavascriptInterface(new WebAppInterface(this), "Android");
         webView.setWebViewClient(new WebViewClient());
@@ -234,16 +228,19 @@ public class MainActivity extends AppCompatActivity {
 
         settings.setJavaScriptEnabled(true);
         settings.setAllowFileAccess(true);
-//        settings.setAllowFileAccessFromFileURLs(true);
+        // settings.setAllowFileAccessFromFileURLs(true);
         settings.setAllowContentAccess(true);
         settings.setJavaScriptCanOpenWindowsAutomatically(true);
         settings.setMediaPlaybackRequiresUserGesture(false);
         settings.setDatabaseEnabled(true);
-//        settings.setCacheMode(WebSettings.LOAD_CACHE_ELSE_NETWORK);
+
+        // settings.setSupportMultipleWindows(true);
+        // settings.setCacheMode(WebSettings.LOAD_CACHE_ELSE_NETWORK);
+        // settings.setUserAgentString("Mozilla/5.0 (Linux; Android 10; WebView) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/100.0.4896.127 Mobile Safari/537.36");
         settings.setDomStorageEnabled(true);
+        settings.setSafeBrowsingEnabled(false);// 是否开启安全模式
         settings.setDefaultTextEncodingName("utf-8");
 
-//        settings.setCacheMode();
         webView.setDownloadListener((url, userAgent, contentDisposition, mimeType, contentLength) -> {
             Uri uri = Uri.parse(url);
             Intent intent = new Intent(Intent.ACTION_VIEW,uri);

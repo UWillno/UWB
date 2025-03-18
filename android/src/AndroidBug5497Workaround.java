@@ -1,4 +1,4 @@
-package com.uwillno.uwb;
+package org.uwillno.uwb;
 
 import android.app.Activity;
 import android.graphics.Rect;
